@@ -80,7 +80,6 @@ public class RPGItemCreator extends JFrame {
         JPanel namePanel = createLabeledField("Item Name:", nameField = new JTextField(), "Randomize", e -> randomizeName());
         inputPanel.add(namePanel);
 
-        // 📖 Description Field
         JPanel descPanel = createLabeledField("Description:", descriptionField = new JTextField(), null, null);
         inputPanel.add(descPanel);
 
