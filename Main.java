@@ -12,6 +12,7 @@ public class Main {
 
     public static ArrayList<Item> items = new ArrayList<>();
 
+    // Goes in front of the item type 
     public static String[] adjectivesForItems = {
             "Agile", "Angry", "Arcane", "Awkward", "Bizarre", "Broken", "Charming", "Clean",
             "Deadly", "Delightful", "Demonic", "Dirty", "Fast", "Fierce", "Fine", "Godly",
@@ -22,6 +23,7 @@ public class Main {
 
     };
 
+    // Item type
     public static String[] objectsForItems = {
             "Sword", "Shield", "Bow", "Dagger", "Staff", "Axe", "Hammer", "Spear",
             "Helmet", "Armor", "Ring", "Amulet", "Cloak", "Boots", "Gloves", "Belt",
@@ -32,6 +34,7 @@ public class Main {
             "Obsidian Monolith", "Spear", "Warhammer", "Shield", "Dagger", "Yavuz's laptop"
     };
 
+    //More words at the end to make it sound fancier
     public static String[] descriptionForItems = {
             "of Eternal Twilight", "of the Whispering Winds", "of the Iron Will", "of the Burning Dawn",
             "of the Silent Night", "of the Forgotten Realms", "of the Shattered Moon", "of the Celestial Flame",
@@ -43,11 +46,13 @@ public class Main {
 
     public static Random random = new Random();
 
+    //Main only used to create the window
     public static void main(String[] args) {
         JFrame frame = new RPGItemCreator();
         frame.setVisible(true);
     }
 
+    //The name randomization handler just takes one from each of the three stated arrays, pretty fun
     public static String randomizeName(){
         String name = "";
 
@@ -58,10 +63,12 @@ public class Main {
         return name;
     }
 
+    //adds an item called from the interface when the button is clicked 
     public static void addItem(Item item) {
         items.add(item);
     }
 
+    //Creates a list of all the available items' descriptions
     public static String DisplayItems(){
         String s = "";
         for(int i = 0; i < items.size(); i++){
@@ -78,6 +85,7 @@ public class Main {
         return s;
     }
 
+    //Writes all the avaialbe items to the file specified in the path input field
     public static String writeFile(String path){
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))){
             for(int i = 0; i < items.size(); i++){
@@ -88,6 +96,7 @@ public class Main {
         return "File written to " + path;
     }
 
+    //Reads all avaialble files and adds them to the existing ones.
     public static String readFile(String path){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path))){
             try{
