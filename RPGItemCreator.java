@@ -22,6 +22,8 @@ public class RPGItemCreator extends JFrame {
     private final Color PARCHMENT = new Color(250, 240, 220);
     private final Color SHADOW_BLACK = new Color(20, 10, 30);
 
+    SoundGenerator soundGen;
+
     public final Color[] RARITY_COLORS = {
             new Color(180, 180, 180),    // Common (Silver)
             new Color(100, 255, 100),   // Uncommon (Green)
@@ -35,6 +37,8 @@ public class RPGItemCreator extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(970, 1000);
         setLocationRelativeTo(null);
+
+        soundGen = new SoundGenerator();
 
         JPanel mainPanel = new JPanel() {
             @Override
@@ -80,6 +84,7 @@ public class RPGItemCreator extends JFrame {
         JPanel namePanel = createLabeledField("Item Name:", nameField = new JTextField(), "Randomize", e -> randomizeName());
         inputPanel.add(namePanel);
 
+        // 📖 Description Field
         JPanel descPanel = createLabeledField("Description:", descriptionField = new JTextField(), null, null);
         inputPanel.add(descPanel);
 
@@ -284,12 +289,20 @@ public class RPGItemCreator extends JFrame {
     // Calls the main class which contains the database with the names, then it creates a name using the methiod
     private void randomizeName() {
         nameField.setText(Main.randomizeName());
+        try{
+            soundGen.playPunch();
+        }catch (Exception e){}
+
     }
 
     // Chooses a random rarity and sends the combo box to display it
     private void randomizeRarity() {
         Random rand = new Random();
         rarityCombo.setSelectedIndex(rand.nextInt(rarityCombo.getItemCount()));
+
+        try{
+            soundGen.playPunch();
+        }catch (Exception e){}
     }
 
     //Clears all the items from the arrayList in the main method
@@ -297,6 +310,10 @@ public class RPGItemCreator extends JFrame {
         Main.items.clear();
         updatePreview();
         itemDisplay.setText("Destroyed all items successfully");
+
+        try{
+            soundGen.playPunch();
+        }catch (Exception e){}
     }
 
     // Handles the item preview and updates all necesssary Ui things when infromation is changed
@@ -348,6 +365,10 @@ public class RPGItemCreator extends JFrame {
         timer.setRepeats(false);
         timer.start();
         updatePreview();
+
+        try{
+            soundGen.playChime();
+        }catch (Exception e){}
     }
 
     //Clears all input fields and text areas and returns the rarity to common
@@ -359,18 +380,30 @@ public class RPGItemCreator extends JFrame {
 
         itemDisplay.removeAll();
         itemDisplay.setBackground(DARK_PURPLE);
+
+        try{
+            soundGen.playPunch();
+        }catch (Exception e){}
     }
 
     //Calls the main method function that writes the text file with all of the items.
     private void writeFile(String path){
         displayItems();
         itemDisplay.setText(Main.writeFile(path));
+
+        try{
+            soundGen.playPunch();
+        }catch (Exception e){}
     }
 
     //Calls the main method to read the file specified in the path input field
     private void readFile(String path){
         itemDisplay.setText(Main.readFile(path));
         numberItems.setText("Count: " + Main.items.size());
+
+        try{
+            soundGen.playPunch();
+        }catch (Exception e){}
     }
 
     //Displays the items in the file preview section
@@ -378,6 +411,10 @@ public class RPGItemCreator extends JFrame {
         itemDisplay.removeAll();
         itemDisplay.setBackground(DARK_PURPLE);
         itemDisplay.setText(Main.DisplayItems());
+
+        try{
+            soundGen.playPunch();
+        }catch (Exception e){}
     }
 
     private class RarityComboBoxRenderer extends DefaultListCellRenderer {
